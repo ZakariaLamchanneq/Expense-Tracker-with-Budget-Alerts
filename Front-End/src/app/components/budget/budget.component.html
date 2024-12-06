@@ -1,0 +1,59 @@
+<div class="container my-4">
+  <h3>Budget Mensuel</h3>
+
+  <!-- Budget Input Form -->
+  <form (ngSubmit)="setBudget()" class="mb-3">
+    <div class="row g-3">
+      <div class="col-md-8">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Budget Mensuel"
+          [(ngModel)]="budget.monthlyBudget"
+          name="monthlyBudget"
+          min="0"
+          step="0.01"
+          required
+        />
+      </div>
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-primary w-100">
+          Mettre à jour
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Alert for Exceeding Budget -->
+  <div *ngIf="budget && budget.totalExpenses > budget.monthlyBudget" class="alert alert-danger">
+    Vous avez dépassé votre budget mensuel de {{ (budget.totalExpenses - budget.monthlyBudget) | currency:'EUR':'symbol':'1.2-2' }}!
+  </div>
+
+  <!-- Budget Progress -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Progression du Budget</h5>
+      <div class="progress" style="height: 30px;">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          [ngClass]="{
+            'bg-success': progress <= 70,
+            'bg-warning': progress > 70 && progress <= 90,
+            'bg-danger': progress > 90
+          }"
+          [style.width.%]="progress"
+        >
+          {{ progress | number:'1.0-0' }}%
+        </div>
+      </div>
+      <div class="mt-2">
+        <p>
+          Dépenses totales :
+          {{ budget.totalExpenses | currency:'EUR':'symbol':'1.2-2' }} /
+          {{ budget.monthlyBudget | currency:'EUR':'symbol':'1.2-2' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

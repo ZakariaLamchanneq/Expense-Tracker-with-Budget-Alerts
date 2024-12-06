@@ -1,0 +1,35 @@
+.custom-navbar {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0 0 10px 10px; /* Coins arrondis */
+  }
+  
+  .custom-navbar:hover {
+    background: linear-gradient(90deg, #0056b3, #007bff);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre portée au survol */
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    transition: color 0.3s ease, transform 0.2s ease; /* Animation de transformation */
+  }
+  
+  .nav-link:hover {
+    color: #ffcc00; /* Couleur au survol */
+    transform: scale(1.1); /* Légère augmentation de la taille au survol */
+  }
+  
+  .nav-link.active {
+    border-bottom: 2px solid #ffcc00; /* Souligner le lien actif */
+  }
+  
+  .nav-link i {
+    margin-right: 5px; /* Espacement entre l'icône et le texte */
+  }
+  

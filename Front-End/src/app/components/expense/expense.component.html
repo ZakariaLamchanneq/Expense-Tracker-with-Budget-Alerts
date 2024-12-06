@@ -1,0 +1,143 @@
+<div class="container my-5">
+  <h3 class="mb-4 text-center text-primary">Liste des Dépenses</h3>
+
+  <!-- Expense Input Form -->
+  <form (ngSubmit)="addExpense()" class="mb-4 shadow-sm p-4 rounded bg-light border">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Titre"
+          [(ngModel)]="newExpense.title"
+          name="title"
+          required
+        />
+      </div>
+      <div class="col-md-2">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Montant"
+          [(ngModel)]="newExpense.amount"
+          name="amount"
+          min="0"
+          step="0.01"
+          required
+        />
+      </div>
+      <div class="col-md-3">
+        <select
+          class="form-select"
+          [(ngModel)]="newExpense.categoryId"
+          name="categoryId"
+          required
+        >
+          <option value="">Sélectionner une catégorie</option>
+          <option
+            *ngFor="let category of categories"
+            [value]="category.id"
+          >
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="newExpense.date"
+          name="date"
+          required
+        />
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-success w-100 shadow-sm">
+          Ajouter
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Button to add a new category -->
+  <div class="mb-4 text-center">
+    <button
+      class="btn btn-secondary shadow-sm"
+      (click)="openCategoryModal()"
+    >
+      Ajouter une catégorie
+    </button>
+  </div>
+
+  <!-- Expenses Table -->
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-light">
+      <tr>
+        <th>Titre</th>
+        <th>Montant</th>
+        <th>Date</th>
+        <th>Catégorie</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let expense of expenses">
+        <td>{{ expense.title }}</td>
+        <td>{{ expense.amount | currency:'EUR':'symbol':'1.2-2' }}</td>
+        <td>{{ expense.date | date:'mediumDate' }}</td>
+        <td>{{ expense.category?.name }}</td>
+        <td>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteExpense(expense.id)"
+          >
+            Supprimer
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal to add a new category -->
+<div class="modal" tabindex="-1" id="categoryModal" *ngIf="isCategoryModalOpen" style="display: block; z-index: 1050;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalLabel">Ajouter une nouvelle catégorie</h5>
+        <button type="button" class="btn-close" (click)="closeCategoryModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addCategory()">
+          <div class="mb-3">
+            <label for="categoryName" class="form-label">Nom de la catégorie</label>
+            <input
+              type="text"
+              class="form-control"
+              id="categoryName"
+              [(ngModel)]="newCategory.name"
+              name="categoryName"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success Toast Notifications -->
+<!-- Success Toast Notifications -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11;">
+  <div *ngIf="showSuccess" [ngClass]="'toast show ' + toastType" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ toastMessage }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showSuccess = false"></button>
+    </div>
+  </div>
+</div>

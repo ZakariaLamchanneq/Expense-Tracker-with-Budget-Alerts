@@ -1,0 +1,80 @@
+/* Container styling */
+.container {
+  max-width: 1200px;
+  margin-top: 30px;
+}
+
+/* Form styling */
+.form-control, .form-select {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Table styling */
+.table {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9; /* Alternating row colors */
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef; /* Hover color */
+}
+
+/* Button styling */
+.btn-success, .btn-secondary {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.btn-success:hover, .btn-secondary:hover {
+  transform: scale(1.05);
+}
+
+/* Modal custom styles */
+.modal-content {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Toast styling */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 200px;
+  background-color: #28a745; /* Green for success */
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.toast-success {
+  background-color: #28a745; /* Green for success */
+}
+
+.toast-danger {
+  background-color: #dc3545; /* Red for error */
+}
+
+.toast-info {
+  background-color: #17a2b8; /* Blue for info */
+}
